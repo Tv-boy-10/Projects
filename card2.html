@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WestorX</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --primary: #0A0A0A;
+      --primary-dark: #0A0A0A;
+      --bg: #000000;
+      --text: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    section {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-content {
+      text-align: center;
+      padding: 1rem 2rem;
+    }
+
+    .hero-logo {
+      font-size: 4rem;
+      color: white;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .hero-logo span {
+      color: var(--primary);
+    }
+
+    .hero-btns {
+      margin-top: 2rem;
+    }
+
+    .btn {
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-outline {
+      border: 2px solid var(--primary);
+      background: transparent;
+      color: var(--primary);
+    }
+
+    .btn-outline:hover {
+      background: var(--primary);
+      color: var(--bg);
+    }
+
+    .scroll-down {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.5rem;
+      color: var(--primary);
+      animation: bounce 2s infinite;
+      z-index: 10;
+    }
+
+    @keyframes bounce {
+      0%,
+      100% {
+        transform: translate(-50%, 0);
+      }
+
+      50% {
+        transform: translate(-50%, -10px);
+      }
+    }
+
+    .service-btn-bottom {
+      position: absolute;
+      bottom: 1.2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      padding: 0.8rem 2rem;
+      background: var(--primary);
+      color: white;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .service-btn-bottom:hover {
+      background: var(--primary-dark);
+      transform: translateX(-50%) translateY(-2px);
+      box-shadow: 0 5px 15px #454444;
+    }
+
+    @media (max-width: 575px) {
+      .hero-logo {
+        font-size: 1.5rem;
+      }
+
+      .service-btn-bottom {
+        padding: 0.2rem 1.2rem;
+        font-size: 0.9rem;
+        color: white;
+        bottom: 1rem;
+        width: 222px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-logo {
+        font-size: 2.5rem;
+      }
+
+      .btn {
+        padding: 1.6rem 1.8rem;
+        font-size: 0.9rem;
+        color: white;
+        bottom: 1.2rem;
+      }
+    }
+
+    /* Stacked Card Slider Styles */
+    .slider-container {
+      position: relative;
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000000;
+    }
+
+    .card-wrapper {
+      position: relative;
+      width: 700px;
+      height: 500px;
+      perspective: 1000px;
+    }
+
+    .card {
+      --white: #ffffff;
+      --black: #000000;
+      --paragraph: #c0c0c0;
+      --line: #242124;
+      --primary: #353839;
+
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(8, 8, 8, 0.95);
+      border-radius: 1rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      padding: 1.5rem;
+      transition: transform 0.5s ease, opacity 0.5s ease;
+      opacity: 0;
+      display: flex;
+      flex-direction: column;
+      background-image:
+            radial-gradient(at 88% 40%, #080808 0px, transparent 85%),
+            radial-gradient(at 49% 30%, #080808 0px, transparent 85%),
+            radial-gradient(at 14% 26%, #080808 0px, transparent 85%),        
+            radial-gradient(at 0% 64%, #242124 0px, transparent 85%),
+            radial-gradient(at 41% 94%, #333333 0px, transparent 85%),
+            radial-gradient(at 100% 99%, #353839 0px, transparent 85%);
+      box-shadow: 0px -16px 24px 0px rgba(255, 255, 255, 0.1) inset;
+    }
+    .card .card__border {
+      overflow: hidden;
+      pointer-events: none;
+      position: absolute;
+      z-index: -10;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: calc(100% + 2px);
+      height: calc(100% + 2px);
+      border-radius: 1rem;
+      background-image: linear-gradient(0deg, #ffffff -50%, #353839 100%);
+    }
+
+    .card .card__border::before {
+      content: "";
+      pointer-events: none;
+      position: fixed;
+      z-index: 200;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(0deg);
+      transform-origin: left;
+      width: 200%;
+      height: 10rem;
+      background-image: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0) 0%,
+        #333333 40%,
+        #333333 60%,
+        rgba(0, 0, 0, 0) 100%
+      );
+      animation: rotate 8s linear infinite;
+    }
+
+    @keyframes rotate {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .card_title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #ffffff;
+      margin-bottom: 0.5rem;
+    }
+
+    .card_paragraph {
+      font-size: 0.95rem;
+      color: #c0c0c0;
+      margin-bottom: 1rem;
+    }
+
+    .line {
+      height: 1px;
+      background: #444;
+      margin: 0.5rem 0;
+      border: none;
+    }
+
+    .card__list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      flex-grow: 1;
+    }
+
+    .card__list_item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.8rem;
+    }
+
+    .check {
+      background: #353839;
+      border-radius: 50%;
+      width: 1.2rem;
+      height: 1.2rem;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 0.8rem;
+    }
+
+    .check .check_svg {
+      width: 0.8rem;
+      height: 0.8rem;
+      fill: #000000;
+    }
+
+    .list_text {
+      font-size: 0.9rem;
+      color: #ffffff;
+    }
+
+    .button {
+      margin-top: auto;
+      background: #353839;
+      border: none;
+      color: white;
+      padding: 0.8rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .button:hover {
+      background: #505457;
+      transform: translateY(-2px);
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: white;
+      font-size: 2rem;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 100;
+      transition: all 0.3s ease;
+    }
+
+    .arrow:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .arrow.left {
+      left: 2rem;
+    }
+
+    .arrow.right {
+      right: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .card-wrapper {
+        width: 280px;
+        height: 380px;
+      }
+      
+      .arrow {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1.5rem;
+      }
+      
+      .arrow.left {
+        left: 1rem;
+      }
+      
+      .arrow.right {
+        right: 1rem;
+      }
+    }
+    .glass-container {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 300px;
+      margin-top: 50px;
+    }
+
+    .glass-container .glass {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      background: linear-gradient(#fff2, transparent);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 25px 25px rgba(0, 0, 0, 0.25);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: 0.5s;
+      border-radius: 10px;
+      margin: 0 -45px;
+      backdrop-filter: blur(10px);
+      transform: rotate(calc(var(--r) * 1deg));
+    }
+
+    .glass-container:hover .glass {
+      transform: rotate(0deg);
+      margin: 0 10px;
+    }
+
+    .glass-container .glass::before {
+      content: attr(data-text);
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.05);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+    }
+    .glass-container .glass svg {
+      font-size: 2.5em;
+      fill: #fff;
+    }
+        @layer base, demo;
+@import url(https://fonts.bunny.net/css?family=abel:400);
+
+@layer demo {
+	.carousel {
+		--items: 5;
+		--carousel-duration: 40s;
+		@media (width > 600px) {
+			--carousel-duration: 30s;
+		}
+		--carousel-width: min(
+			80vw,
+			1200px
+		); /* note - it will "break" if it gets too wide and there aren't enough items */
+		--carousel-item-width: 300px;
+		--carousel-item-height: 350px;
+		--carousel-item-gap: 2rem;
+
+		--clr-cta: rgb(0, 132, 209);
+
+		position: relative;
+		width: var(--carousel-width);
+		height: var(--carousel-item-height);
+		overflow: clip;
+
+		&[mask] {
+			/* fade out on sides */
+			mask-image: linear-gradient(
+				to right,
+				transparent,
+				black 10% 90%,
+				transparent
+			);
+		}
+
+		&[reverse] > article {
+			animation-direction: reverse;
+		}
+		/* hover pauses animation */
+		&:hover > article {
+			animation-play-state: paused;
+		}
+	}
+	.carousel > article {
+		position: absolute;
+		top: 0;
+		left: calc(100% + var(--carousel-item-gap));
+		width: var(--carousel-item-width);
+		height: var(--carousel-item-height);
+		display: grid;
+		grid-template-rows: 200px auto 1fr auto;
+		gap: 0.25rem;
+		border: 1px solid light-dark(rgba(0 0 0 / 0.25), rgba(255 255 255 / 0.15));
+        align-items: center;
+		padding-block-end: 1rem;
+		border-radius: 10px;
+		background: light-dark(rgb(12, 12, 12), rgba(12, 12, 12, 0.932));
+		color: light-dark(rgb(252, 253, 253), white);
+        font-family: "Georgia";
+        text-align: center;
+
+		/* animation */
+		will-change: transform;
+		animation-name: marquee;
+		animation-duration: var(--carousel-duration);
+		animation-timing-function: linear;
+		animation-iteration-count: infinite;
+		animation-delay: calc(
+			var(--carousel-duration) / var(--items) * 1 * var(--i) * -1
+		);
+		&:nth-child(1) {
+			--i: 0;
+		}
+		&:nth-child(2) {
+			--i: 1;
+		}
+		&:nth-child(3) {
+			--i: 2;
+		}
+		&:nth-child(4) {
+			--i: 3;
+		}
+		&:nth-child(5) {
+			--i: 4;
+		}
+		&:nth-child(6) {
+			--i: 5;
+		}
+		&:nth-child(7) {
+			--i: 6;
+		}
+		&:nth-child(8) {
+			--i: 7;
+		}
+	}
+	.carousel img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+
+		border-radius: 10px 10px 0 0;
+	}
+	.carousel > article > *:not(img) {
+		padding: 0 1rem;
+	}
+	.carousel > article > div {
+		grid-row: span 2;
+		display: grid;
+		grid-template-rows: subgrid;
+		font-size: 0.8rem;
+	}
+	.carousel > article h2 {
+		font-size: 1.2rem;
+		font-weight: 300;
+		padding-block: 0.75rem 0.25rem;
+		margin: 0;
+	}
+	.carousel > article p {
+		margin: 0;
+	}
+	.carousel > article a {
+		text-decoration: none;
+		text-transform: lowercase;
+		border: 1px solid var(--clr-cta);
+		color: light-dark(var(--clr-cta), white);
+		border-radius: 3px;
+		padding: 0.25rem 0.5rem;
+		place-self: start;
+		transition: 150ms ease-in-out;
+		&:hover,
+		&:focus-visible {
+			background-color: var(--clr-cta);
+			color: white;
+			outline: none;
+		}
+	}
+
+	@keyframes marquee {
+		100% {
+			transform: translateX(
+				calc(
+					(var(--items) * (var(--carousel-item-width) + var(--carousel-item-gap))) *
+						-1
+				)
+			);
+		}
+	}
+}
+
+/* general styling */
+@layer base {
+	* {
+		box-sizing: border-box;
+	}
+	:root {
+		color-scheme: light dark;
+
+		--bg-dark: rgb(2, 6, 24);
+		--bg-light: rgb(229, 229, 229);
+		--txt-light: rgb(10, 10, 10);
+		--txt-dark: rgb(245, 245, 245);
+	}
+	body {
+		background-color: light-dark(var(--bg-light), var(--bg-dark));
+		color: light-dark(var(--txt-light), var(--txt-dark));
+		min-height: 100svh;
+		margin: 0;
+		padding: 1rem;
+		font-size: 1rem;
+		font-family: "Abel", sans-serif;
+		line-height: 1.5;
+		display: grid;
+		place-items: center;
+		gap: 2rem;
+	}
+}
+
+    /* About Section Styles */
+    .about-section {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background: #000000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .text-container {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .text-box {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 800;
+      font-style: normal;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8rem;
+      white-space: nowrap;
+      text-transform: uppercase;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      opacity: 0;
+      transition: all 0.5s ease;
+      transform: scale(0);
+    }
+
+    .box1 {
+      color: var(--text1);
+      text-shadow: 
+        6px 6px var(--shadow1), 5px 5px var(--shadow1),
+        5.5px 5.5px var(--shadow1), 5.25px 5.25px var(--shadow1),
+        5.75px 5.75px var(--shadow1), 4px 4px var(--shadow1),
+        4.5px 4.5px var(--shadow1), 4.25px 4.25px var(--shadow1),
+        4.75px 4.75px var(--shadow1), 3px 3px var(--shadow1),
+        3.5px 3.5px var(--shadow1), 3.25px 3.25px var(--shadow1),
+        3.75px 3.75px var(--shadow1), 2px 2px var(--shadow1),
+        2.5px 2.5px var(--shadow1), 2.25px 2.25px var(--shadow1),
+        2.75px 2.75px var(--shadow1), 1px 1px var(--shadow1),
+        1.5px 1.5px var(--shadow1), 1.25px 1.25px var(--shadow1),
+        1.75px 1.75px var(--shadow1), 0.5px 0.5px var(--shadow1),
+        0.25px 0.25px var(--shadow1), 0.75px 0.75px var(--shadow1);
+    }
+
+    .box2 {
+      color: var(--text2);
+      text-shadow: 
+        6px 6px var(--shadow2), 5px 5px var(--shadow2),
+        5.5px 5.5px var(--shadow2), 5.25px 5.25px var(--shadow2),
+        5.75px 5.75px var(--shadow2), 4px 4px var(--shadow2),
+        4.5px 4.5px var(--shadow2), 4.25px 4.25px var(--shadow2),
+        4.75px 4.75px var(--shadow2), 3px 3px var(--shadow2),
+        3.5px 3.5px var(--shadow2), 3.25px 3.25px var(--shadow2),
+        3.75px 3.75px var(--shadow2), 2px 2px var(--shadow2),
+        2.5px 2.5px var(--shadow2), 2.25px 2.25px var(--shadow2),
+        2.75px 2.75px var(--shadow2), 1px 1px var(--shadow2),
+        1.5px 1.5px var(--shadow2), 1.25px 1.25px var(--shadow2),
+        1.75px 1.75px var(--shadow2), 0.5px 0.5px var(--shadow2),
+        0.25px 0.25px var(--shadow2), 0.75px 0.75px var(--shadow2);
+    }
+
+    .box3 {
+      color: var(--text3);
+      text-shadow: 
+        6px 6px var(--shadow3), 5px 5px var(--shadow3),
+        5.5px 5.5px var(--shadow3), 5.25px 5.25px var(--shadow3),
+        5.75px 5.75px var(--shadow3), 4px 4px var(--shadow3),
+        4.5px 4.5px var(--shadow3), 4.25px 4.25px var(--shadow3),
+        4.75px 4.75px var(--shadow3), 3px 3px var(--shadow3),
+        3.5px 3.5px var(--shadow3), 3.25px 3.25px var(--shadow3),
+        3.75px 3.75px var(--shadow3), 2px 2px var(--shadow3),
+        2.5px 2.5px var(--shadow3), 2.25px 2.25px var(--shadow3),
+        2.75px 2.75px var(--shadow3), 1px 1px var(--shadow3),
+        1.5px 1.5px var(--shadow3), 1.25px 1.25px var(--shadow3),
+        1.75px 1.75px var(--shadow3), 0.5px 0.5px var(--shadow3),
+        0.25px 0.25px var(--shadow3), 0.75px 0.75px var(--shadow3);
+    }
+
+    .box4 {
+      color: var(--text4);
+      text-shadow: 
+        6px 6px var(--shadow4), 5px 5px var(--shadow4),
+        5.5px 5.5px var(--shadow4), 5.25px 5.25px var(--shadow4),
+        5.75px 5.75px var(--shadow4), 4px 4px var(--shadow4),
+        4.5px 4.5px var(--shadow4), 4.25px 4.25px var(--shadow4),
+        4.75px 4.75px var(--shadow4), 3px 3px var(--shadow4),
+        3.5px 3.5px var(--shadow4), 3.25px 3.25px var(--shadow4),
+        3.75px 3.75px var(--shadow4), 2px 2px var(--shadow4),
+        2.5px 2.5px var(--shadow4), 2.25px 2.25px var(--shadow4),
+        2.75px 2.75px var(--shadow4), 1px 1px var(--shadow4),
+        1.5px 1.5px var(--shadow4), 1.25px 1.25px var(--shadow4),
+        1.75px 1.75px var(--shadow4), 0.5px 0.5px var(--shadow4),
+        0.25px 0.25px var(--shadow4), 0.75px 0.75px var(--shadow4);
+    }
+
+    .active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    @media (max-width: 768px) {
+      .text-box {
+        font-size: 2rem;
+      }
+    }
+    @media (max-width: 992px) {
+      .text-box {
+        font-size: 3rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .text-box {
+        font-size: 2rem;
+        white-space: normal;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Hero Section -->
+  <section id="hero">
+    <div class="hero-bg">
+      <div data-us-project="K55WF093bjStJJEQzT6E" style="width:100%; height:100%"></div>
+    </div>
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-logo"></h1>
+        <div class="hero-btns"></div>
+      </div>
+      <a href="#services" class="btn service-btn-bottom">Explore Services</a>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about-section">
+    <div class="text-container">
+      <div class="text-box box1 active">We Create</div>
+      <div class="text-box box2 ">We Develop</div>
+      <div class="text-box box3 ">We Build</div>
+      <div class="text-box box4 "></div>
+    </div>
+  </section>
+
+  <!-- Services Section with Stacked Card Slider -->
+  <section id="services" style="padding: 100px; background: #000000; display: flex; justify-content: center; align-items: center;">
+    <button class="arrow left" onclick="prevCard()"><svg width="100%" height="100%" viewBox="0 0 24 24" color= "#000000" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg></button>
+    <div class="card-wrapper" id="cardWrapper">
+      <!-- Card 1 -->
+      <div class="card" style="z-index: 5;">
+        <div class="card_title">Explosive Growth</div>
+        <div class="card_paragraph">Perfect for your next content, leave to us and enjoy the result!</div>
+        <hr class="line" />
+        <ul class="card__list">
+          <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">10 Launch Weeks</span></li>
+          <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">10 Influencers Post</span></li>
+          <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">100,000 Views</span></li>
+          <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">10 Reddit Posts</span></li>
+        </ul>
+        <button class="button">Book a Call</button>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card" style="z-index: 4;">
+        <div class="card_title">Premium Package</div>
+        <div class="card_paragraph">High exposure with premium influencers and strategic placements.</div>
+        <hr class="line" />
+        <ul class="card__list">
+          <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">20 Launch Weeks</span></li>
+          <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">15 Influencers Post</span></li>
+          <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">250,000 Views</span></li>
+          <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">4 Hours Consultation</span></li>
+        </ul>
+        <button class="button">Book a Call</button>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card" style="z-index: 3;">
+        <div class="card_title">Complete Solution</div>
+        <div class="card_paragraph">End-to-end marketing solution for maximum impact.</div>
+        <hr class="line" />
+        <ul class="card__list">
+          <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">30 Launch Weeks</span></li>
+          <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">25 Influencers Post</span></li>
+          <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">500,000 Views</span></li>
+          <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">Weekly Strategy Calls</span></li>
+        </ul>
+        <button class="button">Book a Call</button>
+      </div>
+    </div>
+
+    <button class="arrow right" onclick="nextCard()"><svg width="100%" height="100%" color = "#000000" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg></button>
+  </section>
+
+  <section id="contact" style="padding: 100px; background: #000000;">
+    <h2 style="color: white; text-align: center;">Contact Section</h2>
+  </section>
+
+  <section id="social" style="padding: 100px; background: #000000;">
+    <h2 style="color: white; text-align: center;">Social Section</h2>
+    <id="services" style="padding: 100px 0; background: #000000;">
+  <h2 style="color: white; text-align: center; margin-bottom: 2rem;">Our Services</h2>
+  
+  <div class="carousel" mask>
+    <article>
+      <img src="https://media.istockphoto.com/id/491783647/photo/asian-beauty.jpg?s=612x612&w=0&k=20&c=RauwXQ-fB5L7VWjEPxPX_jSNbJZmJ9SkQkJViLNgVNk=?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+      <h2>Social Media Growth</h2>
+      <div>
+        <p>We specialize in explosive social media growth strategies that help your brand gain visibility and engagement across all major platforms.</p>
+      </div>
+    </article>
+
+    <article>
+      <img src="https://theimpression.com/wp-content/uploads/2019/07/style29-style29.st_-1.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="content creation">
+      <h2>Content Creation</h2>
+      <div>
+        <p>Our creative team produces high-quality, engaging content tailored to your brand's voice and audience preferences.</p>
+      </div>
+    </article>
+
+    <article>
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTI-zCJFUR_eLmhXcNuG7h0DHGV5pJJSqY5NUo2XUo67lmKeNvw30Sbk8rjsFXGnFBh5Vw&usqp=CAU?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="influencer marketing">
+      <h2>Influencer Marketing</h2>
+      <div>
+        <p>We connect you with the right influencers to amplify your message and reach your target audience effectively.</p>
+      </div>
+    </article>
+
+    <article>
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5g-Vz24XH0cn67LRIOd2rYVn-JWduZMRLeA&s?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="brand strategy">
+      <h2>Brand Strategy</h2>
+      <div>
+        <p>Comprehensive brand development services to establish your unique identity and market positioning.</p>
+      </div>
+    </article>
+
+    <article>
+      <img src="https://w0.peakpx.com/wallpaper/27/812/HD-wallpaper-beauty-girl-bw-model-black-hand-face-white-woman.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="digital advertising">
+      <h2>Digital Advertising</h2>
+      <div>
+        <p>Targeted ad campaigns that deliver results and maximize your return on investment.</p>
+      </div>
+    </article>
+
+    <article>
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQij5TBC9JPsaAe5LkKMsxwOJK6rXRK4lXgPw&s?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="analytics">
+      <h2>Performance Analytics</h2>
+      <div>
+        <p>Data-driven insights and reporting to measure success and optimize your marketing efforts.</p>
+      </div>
+    </article>
+  </div>
+  </section>
+  <section id="glass-cards" style="background: #000000; padding: 50px 0;">
+    <div class="glass-container">
+      <div data-text="Github" style="--r:-15;" class="glass">
+        <svg viewBox="0 0 496 512" height="1em" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"
+          ></path>
+        </svg>
+      </div>
+      <div data-text="Gmail" style="--r:5;" class="glass">
+        <svg width="1em" height="1em" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
+        </svg>
+      </div>
+      <div data-text="Instagram" style="--r:25;" class="glass">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+            <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+  <div style = "height:100%; width:100%; background-color:#161515; text-align:center; padding:10px;"><h3>Copyrights Reserved TEAM X</h3></div>
+  
+  <!-- Load Unicorn Studio Script -->
+  <script type="text/javascript">
+    !function () {
+      if (!window.UnicornStudio) {
+        window.UnicornStudio = { isInitialized: !1 };
+        var i = document.createElement("script");
+        i.src = "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.26/dist/unicornStudio.umd.js";
+        i.onload = function () {
+          if (!window.UnicornStudio.isInitialized) {
+            UnicornStudio.init();
+            window.UnicornStudio.isInitialized = !0;
+          }
+        };
+        (document.head || document.body).appendChild(i);
+      }
+    }();
+  </script>
+
+  <!-- Stacked Card Slider Script -->
+  <script>
+    const cards = document.querySelectorAll(".card");
+    let current = 0;
+
+    function updateStack() {
+      cards.forEach((card, index) => {
+        card.style.opacity = index >= current ? 1 : 0;
+        card.style.transform = `translateY(${(index - current) * 5}px) scale(${1 - (index - current) * 0.02})`;
+        card.style.zIndex = cards.length - (index - current);
+      });
+    }
+
+    function nextCard() {
+      if (current < cards.length - 1) {
+        current++;
+        updateStack();
+      }
+    }
+
+    function prevCard() {
+      if (current > 0) {
+        current--;
+        updateStack();
+      }
+    }
+
+    // Initialize the slider
+    updateStack();
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') {
+        nextCard();
+      } else if (e.key === 'ArrowLeft') {
+        prevCard();
+      }
+    });
+
+    // Touch swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    const slider = document.querySelector('.slider-container');
+    
+    slider.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, {passive: true});
+    
+    slider.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, {passive: true});
+    
+    function handleSwipe() {
+      const threshold = 50;
+      if (touchEndX < touchStartX - threshold) {
+        nextCard();
+      } else if (touchEndX > touchStartX + threshold) {
+        prevCard();
+      }
+    }
+  </script>
+
+  <!-- About Section Scroll Animation -->
+  <script>
+    // Define color variables
+    const root = document.documentElement;
+    root.style.setProperty('--background', '#63ff88');
+    root.style.setProperty('--shadow1', '#d300ff');
+    root.style.setProperty('--text1', '#3d76ff');
+    root.style.setProperty('--shadow2', '#d300ff');
+    root.style.setProperty('--text2', '#fff766');
+    root.style.setProperty('--shadow3', '#53c9ff');
+    root.style.setProperty('--text3', '#ff78b0');
+    root.style.setProperty('--shadow4', '#fff766');
+    root.style.setProperty('--text4', '#35f09f');
+
+    // Get elements
+    const aboutSection = document.getElementById('about');
+    const textBoxes = document.querySelectorAll('.text-box');
+    let currentActive = 0;
+
+    // Function to update active text
+    function updateActiveText() {
+      textBoxes.forEach((box, index) => {
+        if (index === currentActive) {
+          box.classList.add('active');
+        } else {
+          box.classList.remove('active');
+        }
+      });
+    }
+
+    // Scroll event listener
+    window.addEventListener('scroll', () => {
+      const scrollPosition = window.scrollY;
+      const aboutSectionTop = aboutSection.offsetTop;
+      const aboutSectionHeight = aboutSection.offsetHeight;
+      const windowHeight = window.innerHeight;
+
+      // Calculate scroll progress through about section (0 to 1)
+      const scrollProgress = Math.min(1, Math.max(0, (scrollPosition - aboutSectionTop + windowHeight) / aboutSectionHeight));
+
+      // Determine which text should be active based on scroll progress
+      if (scrollProgress < 0.75) {
+        currentActive = 1;
+      } else if (scrollProgress < 0.95) {
+        currentActive = 2;
+      } else if (scrollProgress < 1) {
+        currentActive = 3;
+      } else {
+        currentActive = 0;
+      }
+
+      updateActiveText();
+
+      // Add scaling effect based on scroll position
+      textBoxes.forEach((box, index) => {
+        if (index === currentActive) {
+          const boxProgress = Math.min(1, Math.max(0, (scrollProgress - (index * 0.25)) * 4));
+          const scale = 1 + (boxProgress * 0.5);
+          box.style.transform = `scale(${scale})`;
+          box.style.opacity = 1;
+        } else {
+          box.style.transform = 'scale(0)';
+          box.style.opacity = 0;
+        }
+      });
+    });
+
+    // Initialize
+    updateActiveText();
+  </script>
+</body>
+
+</html>
